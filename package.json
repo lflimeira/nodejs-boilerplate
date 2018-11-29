@@ -1,0 +1,53 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "Project boilerplate",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/bin/server.js",
+    "test": "jest --verbose --forceExit --runInBand",
+    "lint": "eslint './{src,tests}/**/*.js'",
+    "test:unit": "jest -c ./tests/jest.config.unit.js --watchAll --verbose",
+    "test:integration": "jest -c ./tests/jest.config.integration.js --verbose --forceExit",
+    "test:e2e": "jest -c ./tests/jest.config.e2e.js --verbose --forceExit --runInBand",
+    "migrate": "sequelize db:migrate --config src/config/database.js --migrations-path src/database/migrations/"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:lflimeira/nodejs-boilerplate.git"
+  },
+  "author": "Luiz Felipe Limeira <@lflimeira02>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lflimeira/nodejs-boilerplate/issues"
+  },
+  "homepage": "https://github.com/lflimeira/nodejs-boilerplate#readme",
+  "devDependencies": {
+    "eslint": "4.7.2",
+    "eslint-config-pagarme-base": "2.0.0",
+    "eslint-plugin-import": "2.7.0",
+    "jest": "23.5.0",
+    "nock": "9.6.1",
+    "supertest": "3.0.0"
+  },
+  "dependencies": {
+    "body-parser": "1.18.3",
+    "dotenv": "6.0.0",
+    "escriba": "2.3.0",
+    "express": "4.16.3",
+    "joi": "13.6.0",
+    "log4js": "3.0.5",
+    "node-fetch": "2.2.0",
+    "pg": "7.4.3",
+    "ramda": "0.25.0",
+    "sequelize": "4.38.0",
+    "sequelize-cli": "4.1.1"
+  }
+}
