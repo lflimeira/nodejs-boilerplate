@@ -1,0 +1,52 @@
+version: 2
+jobs:
+  test:
+    machine:
+      docker_layer_caching: true
+    working_directory: ~/boilerplate
+    steps:
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - checkout
+      - run:
+          name: Run linter and tests
+          command: |
+            make lint
+            make test
+  build_image:
+    working_directory: ~/boilerplate
+    machine:
+        enabled: true
+    steps:
+      - checkout
+      - run:
+          name: run custom images
+          command: |
+              mkdir -p images
+              docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+              docker build --target production-s -t build-s:latest .
+              docker save -o images/build-s.tar build-s:latest
+      - persist_to_workspace:
+          root: images
+          paths:
+             -  build-s.tar
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /^v.*/
+      - build_image:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v([0-9]+).([0-9]+).([0-9]+).*$/
