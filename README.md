@@ -57,7 +57,7 @@ make test
 
 ## Endpoints, response e requests
 
-### Calculate health plan refund
+### Create example
 
 #### Request
 
@@ -66,10 +66,8 @@ Method POST: `http://localhost:5678/example`
 **Body**
 ```json
 {
-    "medicines": {
-        "name": "Luiz Felipe",
-        "email": "xxxx@gmail.com"
-    }
+    "name": "Luiz Felipe",
+    "email": "xxxx@gmail.com"
 }
 ```
 
