@@ -33,7 +33,7 @@
     "eslint": "4.7.2",
     "eslint-config-pagarme-base": "2.0.0",
     "eslint-plugin-import": "2.7.0",
-    "jest": "23.5.0",
+    "jest": "29.3.1",
     "nock": "9.6.1",
     "supertest": "3.0.0"
   },
